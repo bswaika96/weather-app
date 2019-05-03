@@ -1,0 +1,159 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0,maximum-scale=1')
+    title weather.io
+    // Loading third party fonts
+    link(href='http://fonts.googleapis.com/css?family=Roboto:300,400,700|', rel='stylesheet', type='text/css')
+    link(href='fonts/font-awesome.min.css', rel='stylesheet', type='text/css')
+    // Loading main css file
+    link(rel='stylesheet', href='style.css')
+    //if lt IE 9
+      script(src='js/ie-support/html5.js')
+      script(src='js/ie-support/respond.js')
+  body
+  - let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+  - let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  - let icons = { clear_day: 'images/icons/icon-2.svg', clear_night: 'images/icons/icon-1.svg', rain: 'images/icons/icon-10.svg', snow: 'images/icons/icon-14.svg', sleet: 'images/icons/icon-13.svg', wind: 'images/icons/icon-8.svg', fog: 'images/icons/icon-8.svg', cloudy: 'images/icons/icon-6.svg', partly_cloudy_day: 'images/icons/icon-5.svg', partly_cloudy_night: 'images/icons/icon-7.svg'}
+    .site-content
+      .site-header
+        .container
+          a.branding(href='/')
+            img.logo(src='images/logo.png', alt='')
+            .logo-type
+              h1.site-title(style='font-size: 2rem;') weather.io
+              small.site-description(style='font-size: 1rem;') just the weather, nothing else!
+      // .site-header
+      .hero(data-bg-image='images/banner.png')
+        .container
+          form.find-location(action='/', method='POST')
+            input(type='text', placeholder='Find your location...', name='searchKey')
+            input(type='submit', value='Search')
+      .forecast-table
+        .container
+          .forecast-container
+            .today.forecast
+              .forecast-header
+                .day Today
+                .date #{new Date(data.weather.time * 1000).getDate()} #{months[new Date(data.weather.time * 1000).getDate()]}, #{new Date(data.weather.time * 1000).getFullYear()}
+              // .forecast-header
+              .forecast-content
+                .location #{data.place}
+                .degree
+                  .num
+                    | #{data.weather.temperature.toFixed(0)}
+                    sup o
+                    | C
+                  .forecast-icon
+                    img(src=`${icons[data.weather.icon.replace(/-/g, '_')]}`, alt='', width='90')
+                span
+                  img(src='images/icon-umberella.png', alt='Rain Probability')
+                  | #{data.weather.precipProbability * 100} %
+                span
+                  img(src='images/icon-wind.png', alt='Wind Speed')
+                  | #{data.weather.windSpeed.toFixed(0)} km/h
+                span
+                  img(src='images/icon-compass.png', alt='Pressure')
+                  | #{data.weather.pressure.toFixed(0)} mb
+            .forecast
+              .forecast-header
+                .day Tomorrow
+              // .forecast-header
+              .forecast-content
+                .forecast-icon
+                  img(src=`${icons[data.forecast.data[1].icon.replace(/-/g, '_')]}`, alt='', width='48')
+                .degree
+                  | #{((data.forecast.data[1].temperatureHigh + data.forecast.data[1].temperatureLow)/2).toFixed(0)}
+                  sup o
+                  | C
+                small
+                  | #{((data.forecast.data[1].apparentTemperatureHigh + data.forecast.data[1].apparentTemperatureLow)/2).toFixed(0)}
+                  sup o
+            .forecast
+              .forecast-header
+                .day #{days[new Date(data.forecast.data[2].time * 1000).getDay()]}
+              // .forecast-header
+              .forecast-content
+                .forecast-icon
+                  img(src=`${icons[data.forecast.data[2].icon.replace(/-/g, '_')]}`, alt='', width='48')
+                .degree
+                  | #{((data.forecast.data[2].temperatureHigh + data.forecast.data[2].temperatureHigh)/2).toFixed(0)}
+                  sup o
+                  | C
+                small
+                  | #{((data.forecast.data[2].apparentTemperatureHigh + data.forecast.data[2].apparentTemperatureLow)/2).toFixed(0)}
+                  sup o
+            .forecast
+              .forecast-header
+                .day #{days[new Date(data.forecast.data[3].time * 1000).getDay()]}
+              // .forecast-header
+              .forecast-content
+                .forecast-icon
+                  img(src=`${icons[data.forecast.data[3].icon.replace(/-/g, '_')]}`, alt='', width='48')
+                .degree
+                  | #{((data.forecast.data[3].temperatureHigh + data.forecast.data[3].temperatureHigh)/2).toFixed(0)}
+                  sup o
+                  | C
+                small
+                  | #{((data.forecast.data[3].apparentTemperatureHigh + data.forecast.data[3].apparentTemperatureLow)/2).toFixed(0)}
+                  sup o
+            .forecast
+              .forecast-header
+                .day #{days[new Date(data.forecast.data[4].time * 1000).getDay()]}
+              // .forecast-header
+              .forecast-content
+                .forecast-icon
+                  img(src=`${icons[data.forecast.data[4].icon.replace(/-/g, '_')]}`, alt='', width='48')
+                .degree
+                  | #{((data.forecast.data[4].temperatureHigh + data.forecast.data[4].temperatureHigh)/2).toFixed(0)}
+                  sup o
+                  | C
+                small
+                  | #{((data.forecast.data[4].apparentTemperatureHigh + data.forecast.data[4].apparentTemperatureLow)/2).toFixed(0)}
+                  sup o
+            .forecast
+              .forecast-header
+                .day #{days[new Date(data.forecast.data[5].time * 1000).getDay()]}
+              // .forecast-header
+              .forecast-content
+                .forecast-icon
+                  img(src=`${icons[data.forecast.data[5].icon.replace(/-/g, '_')]}`, alt='', width='48')
+                .degree
+                  | #{((data.forecast.data[5].temperatureHigh + data.forecast.data[5].temperatureHigh)/2).toFixed(0)}
+                  sup o
+                  | C
+                small
+                  | #{((data.forecast.data[5].apparentTemperatureHigh + data.forecast.data[5].apparentTemperatureLow)/2).toFixed(0)}
+                  sup o
+            .forecast
+              .forecast-header
+                .day #{days[new Date(data.forecast.data[6].time * 1000).getDay()]}
+              // .forecast-header
+              .forecast-content
+                .forecast-icon
+                  img(src=`${icons[data.forecast.data[6].icon.replace(/-/g, '_')]}`, alt='', width='48')
+                .degree
+                  | #{((data.forecast.data[6].temperatureHigh + data.forecast.data[6].temperatureHigh)/2).toFixed(0)}
+                  sup o
+                  | C
+                small
+                  | #{((data.forecast.data[6].apparentTemperatureHigh + data.forecast.data[6].apparentTemperatureLow)/2).toFixed(0)}
+                  sup o
+      footer.site-footer
+        .container
+          .row
+            .col-md-3.col-md-offset-0
+              .social-links
+                a(href='https://www.facebook.com/bswaika')
+                  i.fa.fa-facebook
+                a(href='https://www.instagram.com/baladityaswaika/', style="margin-left: 5px")
+                  i.fa.fa-instagram
+                a(href='https://github.com/bswaika96/', style="margin-left: 5px")
+                  i.fa.fa-github
+          p.colophon(style='margin-top:1.5rem; font-size: 1.5rem;') © 2019 weather.io. All Rights Reserved. 
+      // .site-footer
+    script(src='js/jquery-1.11.1.min.js')
+    script(src='js/plugins.js')
+    script(src='js/app.js')
