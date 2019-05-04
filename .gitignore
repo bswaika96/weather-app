@@ -10,10 +10,6 @@ yarn-error.log*
 
 node_modules/
 
-#Public Folder
-
-public/
-
 #DotEnv
 
 .env

@@ -7,6 +7,8 @@ const {at} = require('./src/util')
 
 const app = express()
 
+const port = process.env.PORT || 3000
+
 app.set('view engine', 'pug')
 app.set('views', at('src/views'))
 
@@ -22,6 +24,6 @@ app.all('/', getWeatherMiddleWare, (req, res) => {
 
 //app.post('/api/weather', postWeather)
 
-app.listen(process.env.PORT, () => {
-    console.log('Listening on port '+ process.env.PORT + '...')
+app.listen(port, () => {
+    console.log('Listening on port '+ port + '...')
 })
