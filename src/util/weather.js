@@ -1,4 +1,5 @@
-require('dotenv').config()
+if(process.env.NODE_ENV !== 'production')
+    require('dotenv').config()
 const fetch = require('node-fetch')
 
 const getWeather = async ({location, place}) => {
